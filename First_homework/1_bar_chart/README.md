@@ -17,22 +17,26 @@
 
 ### Пример 1
 #### Ввод:
+```
 Hello, world!
-
+```
 #### Вывод:
+```
      #   
      ##  
 #########
 !,Hdelorw
-
+```
 ### Пример 2
 #### Ввод:
+```
 Twas brillig, and the slithy toves
 Did gyre and gimble in the wabe;
 All mimsy were the borogoves,
 And the mome raths outgrabe.
-
+```
 #### Вывод:
+```
          #              
          #              
          #              
@@ -47,3 +51,4 @@ And the mome raths outgrabe.
 #  #  ############## ###
 ########################
 ,.;ADTabdeghilmnorstuvwy
+```
