@@ -133,12 +133,30 @@ private:
         return pic;
     }
 
-    void insertPicture(std::string &str, int& i, vector<PageElement> &P)
+    void insertPicture(const vector<string>& data, int& i, vector<PageElement> &P, int &id)
     {
-            size_t openParenthesisPos = str.find("(", i);
-            size_t closeParenthesisPos = str.find(")", i);
-            P.push_back(PageElement(ElementType::Image, parsePicture(str.substr(openParenthesisPos, closeParenthesisPos - openParenthesisPos))));
-            i = closeParenthesisPos + 1;
+        size_t openParenthesisPos = data[id].find("(", i);
+        std::string tmp = data[id].substr(openParenthesisPos);
+        while (tmp.find(")") == std::string::npos)
+        {
+            id++;
+            i = 0;
+            tmp.append(" ");
+            tmp.append(data[id]);
+        }
+        size_t closeParenthesisPos = tmp.find(")");
+        // std::cout << tmp.substr(0, closeParenthesisPos) << std::endl;
+        P.push_back(PageElement(ElementType::Image, parsePicture(tmp.substr(0, closeParenthesisPos))));
+        i = data[id].find(")", i) + 1;
+        // std::cout << i << std::endl;
+
+        // size_t openParenthesisPos = data[id].find("(", i);
+        // size_t closeParenthesisPos = data[id].find(")", i);
+        // std::cout << openParenthesisPos << "\t" << closeParenthesisPos << std::endl;
+        // std::cout <<  data[id].substr(openParenthesisPos, closeParenthesisPos - openParenthesisPos) << std::endl;
+        // P.push_back(PageElement(ElementType::Image, parsePicture(data[id].substr(openParenthesisPos, closeParenthesisPos - openParenthesisPos))));
+        // i = data[id].find(")", i) + 1;
+        // std::cout << i << std::endl;
     }
 
     void insertWord(const std::string &line, int& i, vector<PageElement> &P)
@@ -324,26 +342,28 @@ public:
         }
         input.close();
 
+        bool image = false;
         vector<PageElement> P;
-        for (auto line : data)
+        // for (auto line : data)
+        for (int id = 0; id < data.size(); ++id)
         {
-            if (line.find_first_not_of(' ') == string::npos || line.empty())
+            if (data[id].find_first_not_of(' ') == string::npos || data[id].empty())
             {
                 paragraphs.push_back(P);
                 P.clear();
                 continue;
             }
-            for (int i = 0; i < line.size();)
+            for (int i = 0; i < data[id].size();)
             {
-                if (line[i] == ' ')
+                if (data[id][i] == ' ')
                 {
                     ++i;
                     continue;
                 }
-                else if (line[i] == '(')
-                    insertPicture(line, i, P);
+                else if (data[id][i] == '(')
+                    insertPicture(data, i, P, id);
                 else
-                    insertWord(line, i, P);
+                    insertWord(data[id], i, P);
             }
         }
         paragraphs.push_back(P);
