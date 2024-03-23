@@ -1,5 +1,3 @@
-// it works, but too much memory (((
-
 #include <iostream>
 #include <vector>
 #include <sstream>
