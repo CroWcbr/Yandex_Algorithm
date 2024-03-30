@@ -12,31 +12,6 @@ A. Равенство подстрок
 Если строки совпадают — выведите "yes", иначе — "no".
 */
 
-// #include <iostream>
-// #include <string>
-
-// int main()
-// {
-// 	std::string str;
-// 	std::cin >> str;
-
-// 	int Q;
-// 	std::cin >> Q;
-
-// 	while (Q--)
-// 	{
-// 		int L, A, B;
-// 		std::cin >> L >> A >> B;
-
-// 		if (str.substr(A, L) == str.substr(B, L))
-// 			std::cout << "yes" << std::endl;
-// 		else
-// 			std::cout << "no" << std::endl;
-// 	}
-
-// 	return 0;
-// }
-
 #include <iostream>
 #include <string>
 #include <vector>
