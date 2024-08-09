@@ -3,14 +3,15 @@
 #include <vector>
 #include <algorithm>
 
-
-struct Pair {
+struct Pair
+{
     std::string first;
     int second;
     int index;
 };
 
-bool comparePairs(const Pair& a, const Pair& b) {
+bool comparePairs(const Pair& a, const Pair& b)
+{
     return a.first < b.first;
 }
 
